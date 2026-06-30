@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🌐 Smart Digital Gram Vikas System (SDGVS)
 
 Smart Digital Gram Vikas System (SDGVS) is a powerful digital platform designed to connect villagers with the Gram Panchayat and modernize rural governance. The application improves transparency, communication, and accessibility of essential services, helping build smart and digitally empowered village communities.
@@ -96,3 +97,21 @@ SDGVS is not just an application — it is a real-world solution for rural digit
 ## 📩 Contact
 
 For source code or collaboration, feel free to connect.
+=======
+# sdgvs
+
+A new Flutter project.
+
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
+>>>>>>> 1b14d50 (Initial commit)

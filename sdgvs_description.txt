@@ -1,0 +1,254 @@
+
+# SDGVS (Smart Digital Gramin Vikas System) Application Description
+
+## Overview
+SDGVS (Smart Digital Gramin Vikas System) is a comprehensive digital platform designed to modernize rural administration and citizen services. Built with Flutter for cross-platform mobile access and a PostgreSQL backend, its primary mission is to empower rural communities by streamlining communication between citizens (villagers) and local administration (Gram Panchayat). The application bridges the digital divide, facilitating efficient complaint resolution, transparent information dissemination, and data-driven agricultural support.
+
+## Core Features and Modules
+[Same as before...]
+
+## Detailed Activity Flow
+
+### 1. Initialization & Onboarding Flow
+**User Goal:** Launch app and reach the Home Dashboard.
+
+1.  **App Launch (`SplashScreen`)**
+    *   **System:** Displays Logo with animation.
+    *   **System Action:** Checks `SharedPrefs` and `AuthService`.
+        *   *Condition 1:* Language not set -> Navigate to **Language Selection**.
+        *   *Condition 2:* Language set, User not logged in -> Navigate to **Login**.
+        *   *Condition 3:* User Logged in, Not Verified -> Navigate to **Waiting Verification**.
+        *   *Condition 4:* Verified & Logged in -> Navigate to **Home Dashboard**.
+
+2.  **Language Selection (`LanguageSelectionScreen`)**
+    *   **Screen:** Displays cards for English, Hindi, Gujarati.
+    *   **Action:** User taps a language card.
+    *   **System:** Saves locale to `LocaleProvider` & `SharedPrefs` -> Navigates to **Onboarding** or **Login**.
+
+3.  **Authentication (`LoginScreen` & `OtpScreen`)**
+    *   **Screen:** Mobile Number Entry field.
+    *   **Action:** User enters mobile number -> Taps "Get OTP".
+    *   **Transition:** Navigate to `OtpScreen`.
+    *   **Screen:** 4-digit OTP input.
+    *   **Action:** User enters OTP -> Taps "Verify".
+    *   **System:** Calls API.
+        *   *Success (New User):* Navigate to **Profile Setup**.
+        *   *Success (Existing User):* Navigate to **Home**.
+
+4.  **Profile Setup (`ProfileSetupScreen`)**
+    *   **Screen:** Form for Name, Village Selection (Dropdown), Profile Picture Upload.
+    *   **Action:** User fills details -> Taps "Submit".
+    *   **System:** Creates user record -> Navigate to **Home** (or Verification depending on logic).
+
+### 2. Dashboard Navigation Flow
+**User Goal:** Access different services from the central hub.
+
+*   **Home Dashboard (`HomeScreen`)**
+    *   **Layout:** SliverAppBar (Header), Welcome Section, Notice Preview, Feature Grid, Community Poll.
+    *   **Top Bar Actions:**
+        *   *Language Icon:* Opens `LanguageSelectorBottomSheet` -> User changes language -> UI updates immediately.
+        *   *Notification Icon:* Navigates to `NotificationScreen`.
+        *   *Settings Icon:* Navigates to `SettingsScreen`.
+    *   **Feature Grid:** Tapping any card navigates to the respective feature screen (see below).
+
+### 3. Feature-Specific Flows
+
+#### A. Complaints Redressal
+**User Goal:** Report an issue (e.g., broken pipe).
+
+1.  **Category Selection (`ComplaintCategoryScreen`)**
+    *   **Entry:** Tap "Register Complaint" on Home.
+    *   **Screen:** Grid of categories (Water, Road, Sanitation, etc.).
+    *   **Action:** User taps "Water".
+    *   **Transition:** Navigate to `ComplaintFormScreen` with category="Water".
+
+2.  **Filing Complaint (`ComplaintFormScreen`)**
+    *   **Screen:**
+        *   *Info Card:* Shows selected category.
+        *   *Text Field:* User types description.
+        *   *Attachment Buttons:* Photo (Camera/Gallery), Voice (Record Audio).
+    *   **Action (Photo):** Opens `ImagePicker` -> Shows preview thumbnail.
+    *   **Action (Voice):** Taps Mic -> Records -> Taps Stop -> Shows "Audio saved" UI.
+    *   **Action (Submit):** User taps "Submit Complaint".
+    *   **System:** Validates input -> Simulates API call -> Navigate to success.
+
+3.  **Submission Success (`ComplaintSuccessScreen`)**
+    *   **Screen:** Success animation + Generated Complaint ID (e.g., "SDGVS-2024-4521").
+    *   **Action:** User taps "Back to Home" or "View Status".
+
+#### B. Document Locker
+**User Goal:** Upload and view personal documents.
+
+1.  **Locker Dashboard (`DocumentLockerScreen`)**
+    *   **Entry:** Tap "Document Locker" on Home.
+    *   **Screen:** Stats card (Total Docs), Search Bar, Category Filter (Chips), Document List.
+    *   **Action (Filter):** Tap "Aadhaar" chip -> List filters to show only Aadhaar docs.
+
+2.  **Upload Flow**
+    *   **Action:** Tap FAB (+).
+    *   **Sheet:** User selects Document Type (Aadhaar, Ration, etc.) from Bottom Sheet.
+    *   **Dialog:** "Enter Document Title".
+    *   **Action:** User types title -> Taps "Add".
+    *   **System:** Adds document to list (Mock) -> Shows Snackbar "Upload Success".
+
+3.  **View/Delete**
+    *   **Action:** Tap on document item -> Opens Detail Dialog (View/Download).
+    *   **Action:** Tap Delete icon -> Removes item -> Shows Undo SnackBar.
+
+#### C. Agriculture & Farming
+**User Goal:** Check market prices and crop advice.
+
+1.  **Advisory Dashboard (`FarmerAdvisoryScreen`)**
+    *   **Entry:** Tap "Farmer Advisory".
+    *   **Components:**
+        *   *Weather Alert:* Warning Widget (e.g., "Heavy Rain expected").
+        *   *Crop Calendar:* List of crops active in current season (e.g., Cotton - Sowing).
+        *   *Mandi Prices:* Grid showing Crop Name, Price, and Trend (Up/Down arrow).
+        *   *Resources:* ProgressBar for Seed/Fertilizer availability.
+
+2.  **Drill Down**
+    *   **Action:** Tap "View All" on Crop Calendar -> Navigates to `CropCalendarDetailScreen`.
+    *   **Action:** Tap "View All" on Mandi Prices -> Navigates to `MandiPricesDetailScreen`.
+
+#### D. Community Notices & Polls
+1.  **Notice Board (`NoticeBoardScreen`)**
+    *   **Entry:** Tap "Notice Board" preview on Home.
+    *   **Screen:** Labeled list (Water/Power/General). High priority notices highlighted in Red.
+    *   **Action:** Tap a notice -> Navigate to `NoticeDetailScreen` for full text/pdf.
+
+2.  **Voting (`PollsScreen` / Home Widget)**
+    *   **Screen:** List of active polls.
+    *   **Action:** User taps an Option (e.g., "Yes").
+    *   **System:** Updates vote count locally -> Shows percentage bar for all options -> Disables re-voting.
+
+#### E. Emergency Services
+1.  **Services List (`EmergencyServicesScreen`)**
+    *   **Entry:** Tap "Help & Support".
+    *   **Screen:** List cards (Ambulance - 108, Police - 100).
+    *   **Action:** User taps "Call" button.
+    *   **System:** Triggers system phone dialer (Mock/Intent).
+
+#### F. Complaint Status Tracking
+**User Goal:** Check the progress of filed complaints.
+
+1.  **Status Dashboard (`ComplaintStatusScreen`)**
+    *   **Entry:** Tap "Complaint Status" on Home.
+    *   **Screen:** Tabbed Interface containing:
+        *   **Pending:** List of new complaints waiting for action.
+        *   **In Progress:** Complaints currently being worked on by admin.
+        *   **Resolved:** Completed complaints.
+    *   **Action:** User swipes or taps tabs to view lists.
+
+2.  **Viewing Complaint Details**
+    *   **Screen:** Card layout showing Complaint ID, Date, Category, and Description.
+    *   **Admin Remarks:**
+        *   *If In Progress:* Shows what action is being taken (e.g., "Team dispatched").
+        *   *If Resolved:* Shows final resolution note (e.g., "Transformer replaced").
+
+3.  **Providing Feedback**
+    *   **Condition:** Status is 'Resolved'.
+    *   **Action:** Tap "Give Feedback" button on the card.
+    *   **Transition:** Navigate to `FeedbackScreen` to rate the service.
+
+#### G. Government Schemes
+**User Goal:** Find and apply for relevant welfare schemes.
+
+1.  **Category Browse (`SchemeCategoryScreen`)**
+    *   **Entry:** Tap "Govt Schemes" on Home.
+    *   **Screen:** List of sectors (Education, Farming, Health, Pension, etc.).
+    *   **Action:** User taps a category (e.g., "Farming").
+    *   **Transition:** Navigate to `SchemeListScreen` filtered by category.
+
+2.  **Scheme Listing (`SchemeListScreen`)**
+    *   **Screen:** List of schemes (e.g., "PM-KISAN", "Fasal Bima").
+    *   **UI:** Shows Title, Brief Description, and "Free Scheme" tag.
+    *   **Action:** User taps "View Details".
+    *   **Transition:** Navigate to `SchemeDetailScreen`.
+
+3.  **Scheme Details (`SchemeDetailScreen`)**
+    *   **Screen:** Detailed view with sections:
+        *   **Hero Header:** Name & Category.
+        *   **Objectives:** What the scheme aims to do.
+        *   **Eligibility:** Checklist of who can apply.
+        *   **Benefits:** Monetary or support details.
+        *   **Docs Required:** List of documents needed (Aadhaar, Land records, etc.).
+    *   **Action:**
+        *   *Share:* Share scheme info via other apps.
+        *   *Apply Now:* Opens application form or external portal link.
+
+#### H. Notifications Center
+**User Goal:** View alerts and updates.
+
+1.  **Notification List (`NotificationScreen`)**
+    *   **Entry:** Tap "Bell Icon" on Home AppBar.
+    *   **Screen:** Chronological list of notifications.
+    *   **Types:**
+        *   *Complaint Update:* Purple Icon (e.g., "Your complaint is resolved").
+        *   *New Scheme:* Orange Icon (e.g., "New subsidy available").
+        *   *Announcement:* Red Icon (e.g., "Gram Sabha meeting tomorrow").
+    *   **UI:** Unread items highlighted with background color.
+
+2.  **Interaction**
+    *   **Action (Mark Read):** Tap "Mark all as read" in AppBar.
+    *   **Action (Click):** Tap an item -> Marks as read and (optionally) navigates to relevant screen (e.g., click complaint notif -> go to Complaint Status).
+
+### 4. Settings & Profile Management
+**User Goal:** Update profile or app preferences.
+
+1.  **Settings Menu (`SettingsScreen`)**
+    *   **Entry:** Tap Settings Icon on Home AppBar.
+    *   **Header:** Shows User Name, Profile Pic, "Edit" button.
+    *   **List:**
+        *   *Change Language:* navigate to `LanguageSelectionScreen`.
+        *   *Notifications:* Toggle Switch (enabled/disabled).
+        *   *Clear Cache:* Shows Snackbar "Cache Cleared".
+        *   *Check Update:* Shows Snackbar "App is up to date".
+
+2.  **Edit Profile (`EditProfileScreen`)**
+    *   **Entry:** Tap "Edit" on Settings Header.
+    *   **Screen:** Pre-filled form with current data.
+    *   **Action:** Modify Name/Village -> Tap "Save".
+    *   **System:** Updates User Model -> Returns to Settings with new data.
+
+3.  **Logout**
+    *   **Action:** Tap "Logout" button at bottom.
+    *   **Dialog:** "Are you sure?" -> Confirm.
+    *   **Transition:** Clear Session -> Navigate to `LanguageSelectionScreen` (Root).
+
+---
+
+## Generation Prompt
+
+**If you were to ask an AI to build this system, you could use the following prompt:**
+
+"Build a comprehensive flutter application called 'Smart Digital Gramin Vikas System (SDGVS)' designed to digitize rural village administration.
+
+**Tech Stack:**
+- **Frontend:** Flutter (Mobile - Android/iOS)
+- **Backend:** Node.js / Python (implied) or Direct Database interactions
+- **Database:** PostgreSQL
+
+**Key Features to Implement:**
+1.  **Authentication:**
+    - Role-based login (Villager vs. Admin).
+    - Mobile number login with OTP.
+    - Profile creation with village selection and language preference (English, Hindi, Gujarati).
+
+2.  **Modules:**
+    - **Complaints:** Allow users to file text/audio complaints with images. Admins can update status (Pending/Resolved).
+    - **Digital Locker:** Secure upload and storage for documents like Aadhaar/Ration Card.
+    - **Notices:** Admin-posted digital notice board for village announcements.
+    - **Schemes:** A searchable list of government schemes with eligibility and distinct categories.
+    - **Agriculture:** dedicated section for Weather alerts, Crop calendars, and Mandi (market) prices.
+    - **Emergency:** Quick-dial buttons for local emergency services.
+    - **Polls:** Admin-created polls for user voting.
+
+3.  **UI/UX:**
+    - Clean, accessible interface suitable for rural populations.
+    - Bilingual/Trilingual support.
+    - Offline capabilities for viewing previously loaded data (optional but recommended).
+
+4.  **Database Design:**
+    - Use UUIDs for all primary keys.
+    - Create relational tables for Users, Complaints, Schemes, and Agricultural Data.
+    - Implement appropriate indexes for performance on frequently queried fields like mobile numbers and complaint status."

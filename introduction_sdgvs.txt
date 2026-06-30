@@ -1,0 +1,144 @@
+SDGVS stands for Smart Digital Gram Vikas System.
+It is a modern mobile application for village communities.
+The app connects villagers to the Gram Panchayat digitally.
+It provides a digital platform for all official announcements.
+It features a simple design that anyone can understand.
+The app makes communication faster and more transparent.
+SDGVS is a complete digital solution for village management.
+It helps every villager stay updated and connected.
+It brings transparency to the village administration.
+The system is easy to use for people of all ages.
+It helps build a smart and digitally empowered village.
+
+Purpose of SDGVS:
+1. The main purpose is to modernize village administration.
+2. It aims to make government services reachable for everyone.
+3. The app ensures that every citizen gets timely information.
+4. It connects villagers directly with the Gram Panchayat.
+5. It empowers villagers with knowledge and technology.
+6. SDGVS aims to build a better future for every village.
+7. It provides a digital record of all village activities.
+8. It reduces paper work and makes the process faster.
+9. It ensures all government schemes reach the villagers.
+10. It allows villagers to file digital complaints easily.
+
+Scope of SDGVS:
+SDGVS is used for villages under the Gram Panchayat.
+It provides digital notices, government schemes, and village news for villagers.
+It keeps records of village data and assets in one place.
+It helps manage certificates and track village achievements.
+It connects villagers, Gram Panchayat, and village leaders through one platform.
+It supports offline data syncing for areas with poor or no internet.
+SDGVS helps in the development of a smart and well-managed village.
+It provides a way for villagers to give feedback on local projects.
+It helps in tracking village progress and growth over time.
+It makes the entire village management system transparent and fair.
+It ensures that every citizen gets timely information.
+
+Limitation of SDGVS:
+1. The app needs a smartphone which some villagers may not have.
+2. It requires internet for full features, which is not always available.
+4. The app depends on correct data entered by the Panchayat admin.
+5. Real-time updates are only possible when the device is online.
+6. The app does not support very old Android or iOS versions.
+8. It may take time for all villagers to trust and adopt the system.
+
+Technologies used in SDGVS:
+| Category | Technology / Tools |
+| :--- | :--- |
+| **Frontend** | **Flutter (Dart)** for Citizen App with **Hive** for local storage; **React.js (JavaScript)** for Admin and Super Admin Dashboard. |
+| **Backend** | **Node.js** with **Express.js** implementing a REST API. |
+| **Database** | **PostgreSQL** for relational data management and UUID-based primary keys. |
+| **IDE** | **Visual Studio Code** and **Android Studio** for cross-platform development. |
+| **Tools for Diagram** | **draw.io** for System Architecture and Database ERD modeling. |
+
+Functional Requirements of SDGVS:
+(Based on actual app features)
+
+A. Onboarding and Authentication
+1. The app shall show an onboarding screen to new users with app information.
+2. The system shall allow users to register using their mobile number and OTP.
+3. Users shall set up their profile with name, photo, gender, DOB, and address.
+4. The system shall support login for both Gramin users and Panchayat admins.
+5. The system shall redirect users to the correct dashboard based on their role.
+
+B. Home and Dashboard
+1. The app shall show a home screen with quick access to all main features.
+2. The dashboard shall display village news, notices, and important updates.
+
+C. Notice Board
+1. The system shall display official notices posted by the Gram Panchayat.
+2. Users shall be able to read the full detail of each notice.
+
+D. Complaint Management
+1. Users shall be able to choose a complaint category before filing.
+2. Users shall Submit a complaint with a description, photo, or voice note.
+3. Users shall be able to view the current status of all their complaints.
+4. The system shall show a success screen after a complaint is submitted.
+
+E. Government Schemes
+1. The system shall show a list of available government schemes.
+2. Users shall be able to view full details and eligibility of each scheme.
+
+F. Agriculture and Farmer Advisory
+1. The system shall show real-time Mandi market prices for farm products.
+2. The system shall show weather alerts relevant to farming.
+3. The system shall include a crop calendar with planting and harvest guidance.
+
+G. Document Locker
+1. The system shall allow users to store digital copies of their documents.
+
+H. Village News Feed
+1. The system shall display a local news feed for village-related good news.
+2. Users shall be able to read full news articles on a detail screen.
+
+I. Community Polls
+1. Admins shall be able to create polls for village development decisions.
+2. Villagers shall be able to vote on active polls and see results.
+
+J. Impact Dashboard
+1. The app shall show village-level impact statistics and progress.
+2. Users shall be able to see how the Panchayat is growing over time.
+
+K. Rewards and Recognition
+1. The system shall show a leaderboard of top contributing citizens.
+2. The system shall generate certificates for users based on achievements.
+
+L. Chatbot Support
+1. The app shall include an AI chatbot to answer user queries.
+
+M. Emergency Services
+1. The app shall provide a list of emergency contacts (Police, Ambulance, Fire).
+2. Users shall be able to call emergency services directly from the app.
+
+N. Feedback
+1. Users shall be able to submit feedback about village services.
+
+O. Notifications
+1. The system shall send notifications for new notices and important alerts.
+
+P. Settings and Profile
+1. Users shall be able to edit their profile including photo, name, and details.
+2. Users shall be able to manage their notification and account settings.
+
+Non-Functional Requirements of SDGVS:
+
+A. User Friendliness
+The application should use simple icons and visuals so that villagers can easily understand it.
+The design of the app should be clean and easy to navigate.
+The system should support voice reading of notices for users who have difficulty reading.
+
+B. System Speed
+The application should load quickly even on slow internet connections like 3G or 4G.
+Important data such as notices should be stored locally so users can view them offline.
+The system should allow many users to use the app at the same time without slowing down.
+
+C. Data Protection
+All personal data should be safely encrypted while storing and sending through the internet.
+User login sessions should be stored safely on the device.
+
+D. System Stability
+The application should work properly even in areas with weak internet connectivity.
+Data should automatically synchronize with the server when the internet connection becomes available.
+
+

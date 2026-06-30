@@ -1,0 +1,102 @@
+# SDGVS Super Admin Website: Final UI & Interactive Component Blueprint
+
+This document specifies the exact internal contents and active UI behaviors for the 10 core pages required for the Super Admin system. 
+
+---
+
+## 1. Summary of Required Pages (10 Standard Pages)
+1. **Login & Auth**: Authentication and session entry.
+2. **Main Dashboard**: Global overview and real-time pulse of the district.
+3. **Village Directory**: Master list and creation of village entities.
+4. **Admin Management**: User control for Panchayat Administrators.
+5. **Scheme Repository**: Management of centralized government policies.
+6. **Global Complaint Hub**: Oversight and multimedia review of all reported issues.
+7. **Broadcasting Center**: Tools for sending global notifications.
+8. **Agri-Tech Hub**: Management of Mandi prices and Farmer Calendars.
+9. **Emergency Directory**: Control of district-wide emergency contact lists.
+10. **System Reports**: Audit logs, exports, and performance metrics.
+
+---
+
+## 2. In-Depth Page Specifications (What's Inside & Active UI)
+
+### **Page 1: Login & Authentication**
+- **Inside**: 
+    - Full-page responsive background with a professional "Rural India Digital" theme.
+    - **Active UI**:
+        - `Input Focus`: Border glow on email/password fields.
+        - `Loading State`: Spinner on the 'Login' button when clicked.
+        - `Error Handing`: Red toast message if credentials fail; "Too many attempts" locking mechanism.
+        - `Security`: Masking toggle (eye icon) for password visibility.
+
+### **Page 2: Main Dashboard (District Analytics)**
+- **Inside**:
+    - **Live Counters**: Four prominent cards (Villages, Verified Citizens, New Complaints, Active Schemes).
+    - **Interactive Map**: SVG Map of the district. 
+        - `Hover State`: Tooltip showing name and "Complaint Resolution %" of that specific village.
+        - `Active Click`: Clicking a village redirects to its specific management page.
+    - **Notification Bell**: Dropdown with the 5 most recent unread global alerts.
+
+### **Page 3: Village Directory (CRUD)**
+- **Inside**:
+    - **DataTable**: Paginated list with sorting (A-Z, Newer First).
+        - `Column Editing`: Double-click a cell (e.g., Population) to inline-edit.
+    - **Add Village Modal**: Form with fields (Village Name, District Select, Taluka, Pin Code).
+        - `Validation`: Real-time "Name already exists" check.
+    - **Deletion**: Red [Delete] icon prompts a confirmation modal ("Are you sure? This will hide all data for this village").
+
+### **Page 4: Admin Management (Role Controller)**
+- **Inside**:
+    - **Profile Cards**: Grid view of all admins.
+        - `Active Status`: Green dot for "Online" admins; Grey for "Offline".
+    - **Create Admin Form**: 
+        - Fields: Name (Text), Email (Email), Village (Searchable Select), Role (Fixed: Village Admin).
+        - `Flow`: Button click → Loading → Success Toast → Email sent flag.
+    - **Password Reset**: "Generate Temp Password" button that shows the password in a copyable field.
+
+### **Page 5: Scheme Repository (Content Hub)**
+- **Inside**:
+    - **Category Filters**: Tabbed view [Agriculture][Health][Education][Senior].
+    - **Scheme Editor**:
+        - `Rich Text`: Toolbar for bold, italic, and bullet points for "Benefit" and "Eligibility" sections.
+        - `File Upload`: Area for dragging/dropping PDF flyers.
+    - **Toggle Switch**: "Live on App" toggle that instantly hides/shows the scheme to villagers.
+
+### **Page 6: Global Complaint Discovery (The Worklist)**
+- **Inside**:
+    - **Status Tabs**: [Pending (Red)][In-Progress (Blue)][Resolved (Green)].
+    - **Evidence Inspector (The Side-Panel)**:
+        - `Multimedia Gallery`: Grid of photos that open in a Lightbox on click.
+        - `Audio Widget`: Custom play/pause/seek bar for voice complaints.
+        - `Timeline`: Vertical list showing transitions (e.g., "10:00 AM: Reported by Farmer -> 2:00 PM: Viewed by Super Admin").
+
+### **Page 7: Broadcasting Center (Push Notifications)**
+- **Inside**:
+    - **SMS/App Toggle**: Choose whether to send notice via App Notification, SMS, or Both.
+    - **Notice Preview**: A "Phone Frame" mockup that shows exactly how the notice will look on a villager's smartphone.
+    - **Scheduling**: Calendar picker to send a notice at a future date/time.
+
+### **Page 8: Agri-Tech & Mandi Hub**
+- **Inside**:
+    - **Mandi Price Table**: Batch-edit prices for Cotton, Wheat, Rice, etc.
+    - **Weather Alert System**: Dropdown of Warning Types (Heat, Rain, Hail) and an [Apply to All] button.
+    - **Crop Calendar Canvas**: Drag-and-drop crops onto a 12-month calendar (e.g., "Sowing Stage" placed on July).
+
+### **Page 9: Emergency Management**
+- **Inside**:
+    - **Quick-Dial List**: Name (e.g., "Civil Hospital"), Category (Ambulance), and 10-digit Phone Number.
+    - `Active Call Check`: A button to "Test Connectivity" (simulated).
+
+### **Page 10: System Audit & Performance**
+- **Inside**:
+    - **Village Leaderboard**: Bar charts showing which village admin resolved the most complaints this month.
+    - **Export Dashboard**: Form to select `Start Date` and `End Date`.
+    - `Download Animation`: Progress bar for PDF/Excel generation.
+
+---
+
+## 3. Implementation UI Logic (Global)
+1. **Skeleton Loaders**: All tables/charts show grey "Skeleton" shapes while fetching data.
+2. **Infinite Scroll**: Lists load the next 20 items automatically as the user scrolls.
+3. **Responsive Design**: All these "active" elements collapse into a vertical list for Tablet/Mobile viewing.
+4. **Toast Feedback**: Every successful "Action" (Save/Update/Delete) triggers a 3-second non-intrusive popup in the corner.

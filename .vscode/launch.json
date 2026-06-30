@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        
+        {
+            "name": "Flutter",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Flutter (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "Flutter (Debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug"
+        }
+    ]
+}
