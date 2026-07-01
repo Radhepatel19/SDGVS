@@ -1,4 +1,4 @@
 class AppConstants {
   // 🔑 Replace with your actual Gemini API Key
-  static const String geminiApiKey = 'AIzaSyDjufAJXInJe6N8QnRu8VXGzM8TbbYrIik';
+  static const String geminiApiKey = '';
 }
